@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 16">
+  <!-- Cactus-like obstacle -->
+  <g transform="translate(0,0)">
+    <rect x="6" y="4" width="4" height="12" fill="#ffffff"/>
+    <rect x="2" y="8" width="4" height="2" fill="#ffffff"/>
+    <rect x="10" y="6" width="4" height="2" fill="#ffffff"/>
+  </g>
+  
+  <!-- Rock obstacle -->
+  <g transform="translate(16,0)">
+    <polygon points="5,16 10,4 15,16" fill="#ffffff"/>
+  </g>
+</svg>
