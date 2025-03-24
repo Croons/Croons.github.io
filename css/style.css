@@ -540,7 +540,7 @@ footer {
 }
 
 @keyframes secretFound {
-    0% {
+    5% {
         transform: scale(1);
         opacity: 1;
     }
