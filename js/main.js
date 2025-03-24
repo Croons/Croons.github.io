@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const skills = document.querySelector('.skills');
     const projectsGrid = document.querySelector('.projects-grid');
     const achievementContainer = document.querySelector('.achievement-container');
-    const pixelCharacter = document.querySelector('.pixel-character');
     const achievementNotification = document.querySelector('.achievement-notification');
     const btnReadMore = document.querySelector('.btn-read-more');
     const btnReadLess = document.querySelector('.btn-read-less');
@@ -23,10 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize
     initializeAchievements();
-    initializePixelCharacter();
     initializeScrollAnimations();
     initializeModals();
     initializeBioToggle();
+    initializeGame();
 
     // Scroll to sections when links are clicked
     const navLinks = document.querySelectorAll('nav a, .quick-links a');
@@ -52,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize read more/less toggle for bio
     function initializeBioToggle() {
+        if (!btnReadMore || !btnReadLess || !bioShort || !bioFull) return;
+
         btnReadMore.addEventListener('click', function () {
             bioShort.style.display = 'none';
             bioFull.style.display = 'block';
@@ -112,9 +113,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Achievement panel toggle
-        document.querySelector('.achievement-container::after').addEventListener('click', function () {
-            achievementContainer.classList.toggle('show');
-        });
+        if (achievementContainer) {
+            achievementContainer.addEventListener('click', function () {
+                this.classList.toggle('show');
+            });
+        }
     }
 
     // Check for section-based achievements
@@ -133,279 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         });
-    }
-
-    // Initialize pixel character and jumping game
-    function initializePixelCharacter() {
-        if (!document.querySelector('.pixel-character')) return;
-
-        // Game elements
-        const character = document.querySelector('.pixel-character');
-        const gameArea = document.querySelector('.game-area');
-        const scoreDisplay = document.querySelector('.score');
-
-        // Game state
-        let gameActive = true;
-        let jumping = false;
-        let score = 0;
-        let highScore = 0;
-        let movingLeft = false;
-        let movingRight = false;
-        let characterPosition = 20; // Percentage from left
-        const moveSpeed = 0.5; // Percentage per frame
-        const minPosition = 5; // Min percentage from left
-        const maxPosition = 85; // Max percentage from left
-        const jumpHeight = 40; // px
-
-        // Controls
-        document.addEventListener('keydown', function (e) {
-            if (!gameActive) return;
-
-            switch (e.key.toLowerCase()) {
-                case 'a':
-                case 'arrowleft':
-                    movingLeft = true;
-                    if (!jumping) {
-                        character.className = 'pixel-character run-left';
-                    }
-                    break;
-                case 'd':
-                case 'arrowright':
-                    movingRight = true;
-                    if (!jumping) {
-                        character.className = 'pixel-character run-right';
-                    }
-                    break;
-                case 'w':
-                case 'arrowup':
-                case ' ':
-                    if (!jumping) {
-                        jump();
-                    }
-                    break;
-            }
-        });
-
-        document.addEventListener('keyup', function (e) {
-            switch (e.key.toLowerCase()) {
-                case 'a':
-                case 'arrowleft':
-                    movingLeft = false;
-                    if (!jumping && !movingRight) {
-                        character.className = 'pixel-character idle';
-                    }
-                    break;
-                case 'd':
-                case 'arrowright':
-                    movingRight = false;
-                    if (!jumping && !movingLeft) {
-                        character.className = 'pixel-character idle';
-                    }
-                    break;
-            }
-        });
-
-        // Game loop
-        function gameLoop() {
-            if (!gameActive) return;
-
-            // Move character left/right
-            if (movingLeft && characterPosition > minPosition) {
-                characterPosition -= moveSpeed;
-            }
-            if (movingRight && characterPosition < maxPosition) {
-                characterPosition += moveSpeed;
-            }
-
-            // Update character position
-            character.style.left = characterPosition + '%';
-
-            requestAnimationFrame(gameLoop);
-        }
-
-        // Jump function
-        function jump() {
-            if (jumping) return;
-
-            jumping = true;
-            character.className = 'pixel-character jump';
-            character.style.bottom = jumpHeight + 'px';
-
-            setTimeout(() => {
-                character.style.bottom = '0px';
-
-                setTimeout(() => {
-                    jumping = false;
-
-                    // Reset animation based on movement
-                    if (movingLeft) {
-                        character.className = 'pixel-character run-left';
-                    } else if (movingRight) {
-                        character.className = 'pixel-character run-right';
-                    } else {
-                        character.className = 'pixel-character idle';
-                    }
-                }, 500);
-            }, 500);
-        }
-
-        // Obstacle spawning
-        function spawnObstacle() {
-            if (!gameActive) return;
-
-            // Create obstacle
-            const obstacle = document.createElement('div');
-            obstacle.classList.add('obstacle');
-
-            // Randomize obstacle type (cactus or rock)
-            const obstacleType = Math.random() > 0.5 ? 0 : -16;
-            obstacle.style.backgroundPosition = obstacleType + 'px 0';
-
-            obstacle.style.left = '100%';
-            gameArea.appendChild(obstacle);
-
-            // Random time until next obstacle (speed increases with score)
-            const difficultyFactor = Math.max(0.7, 1 - (score * 0.01));
-            const nextSpawnTime = Math.random() * 3000 * difficultyFactor + 1000;
-
-            // Obstacle movement
-            let obstaclePosition = 100;
-            const obstacleSpeed = 0.2 + (score * 0.002);
-
-            const moveObstacle = setInterval(() => {
-                if (!gameActive) {
-                    clearInterval(moveObstacle);
-                    return;
-                }
-
-                obstaclePosition -= obstacleSpeed;
-                obstacle.style.left = obstaclePosition + '%';
-
-                // Check if obstacle passed character position
-                if (obstaclePosition < characterPosition - 2 && obstaclePosition > characterPosition - 5) {
-                    // Passed successfully, increment score
-                    if (!obstacle.passed) {
-                        obstacle.passed = true;
-                        score++;
-                        highScore = Math.max(score, highScore);
-                        scoreDisplay.textContent = score;
-
-                        // Achievements based on score
-                        if (score === 10) unlockAchievement('high-score-10');
-                        if (score === 25) unlockAchievement('high-score-25');
-                        if (score === 50) unlockAchievement('high-score-50');
-                    }
-                }
-
-                // Check collision
-                const characterRect = character.getBoundingClientRect();
-                const obstacleRect = obstacle.getBoundingClientRect();
-
-                if (
-                    characterRect.left < obstacleRect.right &&
-                    characterRect.right > obstacleRect.left &&
-                    characterRect.bottom > obstacleRect.top &&
-                    characterRect.top < obstacleRect.bottom
-                ) {
-                    // Collision detected
-                    clearInterval(moveObstacle);
-                    gameOver();
-                }
-
-                // Remove when off screen
-                if (obstaclePosition < -10) {
-                    clearInterval(moveObstacle);
-                    obstacle.remove();
-                }
-            }, 16); // ~60fps
-
-            // Schedule next obstacle
-            setTimeout(spawnObstacle, nextSpawnTime);
-        }
-
-        // Game over function
-        function gameOver() {
-            gameActive = false;
-
-            // Show game over effect
-            character.style.opacity = '0.5';
-            character.className = 'pixel-character idle';
-
-            // Check for master jumper achievement (score >= 15)
-            if (score >= 15) {
-                unlockAchievement('master-jumper');
-            }
-
-            // Reset everything after a delay
-            setTimeout(() => {
-                // Reset character
-                character.style.opacity = '1';
-                character.style.bottom = '0px';
-                characterPosition = 20;
-                character.style.left = characterPosition + '%';
-
-                // Reset game state
-                jumping = false;
-                movingLeft = false;
-                movingRight = false;
-
-                // Remove all obstacles
-                document.querySelectorAll('.obstacle').forEach(el => el.remove());
-
-                // Reset score
-                score = 0;
-                scoreDisplay.textContent = score;
-
-                // Restart game
-                gameActive = true;
-                setTimeout(spawnObstacle, 2000);
-            }, 2000);
-        }
-
-        // Start game
-        gameLoop();
-        setTimeout(spawnObstacle, 2000);
-
-        // Click character to jump and get achievement
-        character.addEventListener('click', function () {
-            unlockAchievement('click-pixel');
-            if (!jumping && gameActive) {
-                jump();
-            }
-        });
-    }
-
-    // Unlock achievement and show notification
-    function unlockAchievement(id) {
-        if (!unlockedAchievements.includes(id)) {
-            unlockedAchievements.push(id);
-
-            // Save to local storage
-            localStorage.setItem('achievements', JSON.stringify(unlockedAchievements));
-
-            // Update UI
-            const achievement = document.querySelector(`.achievement[data-id="${id}"]`);
-            if (achievement) {
-                achievement.classList.add('unlocked');
-
-                // Show notification
-                showAchievementNotification(achievement.textContent);
-            }
-        }
-    }
-
-    // Show achievement notification
-    function showAchievementNotification(text) {
-        const notificationName = achievementNotification.querySelector('.notification-name');
-        notificationName.textContent = text;
-
-        // Animate in
-        achievementNotification.classList.add('show');
-
-        // Remove after delay
-        setTimeout(() => {
-            achievementNotification.classList.remove('show');
-        }, 3000);
     }
 
     // Initialize scroll animations
@@ -431,6 +161,43 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Unlock achievement and show notification
+    function unlockAchievement(id) {
+        if (!unlockedAchievements.includes(id)) {
+            unlockedAchievements.push(id);
+
+            // Save to local storage
+            localStorage.setItem('achievements', JSON.stringify(unlockedAchievements));
+
+            // Update UI
+            const achievement = document.querySelector(`.achievement[data-id="${id}"]`);
+            if (achievement) {
+                achievement.classList.add('unlocked');
+
+                // Show notification
+                showAchievementNotification(achievement.textContent);
+            }
+        }
+    }
+
+    // Show achievement notification
+    function showAchievementNotification(text) {
+        if (!achievementNotification) return;
+
+        const notificationName = achievementNotification.querySelector('.notification-name');
+        if (notificationName) {
+            notificationName.textContent = text;
+        }
+
+        // Animate in
+        achievementNotification.classList.add('show');
+
+        // Remove after delay
+        setTimeout(() => {
+            achievementNotification.classList.remove('show');
+        }, 3000);
+    }
+
     // Initialize project modals
     function initializeModals() {
         projectCards.forEach(card => {
@@ -443,25 +210,31 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Close modal when clicking close button
-        closeModalBtn.addEventListener('click', closeModal);
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
 
         // Close modal when clicking outside
-        projectModal.addEventListener('click', function (e) {
-            if (e.target === projectModal) {
-                closeModal();
-            }
-        });
+        if (projectModal) {
+            projectModal.addEventListener('click', function (e) {
+                if (e.target === projectModal) {
+                    closeModal();
+                }
+            });
 
-        // Close modal with Escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && projectModal.classList.contains('show')) {
-                closeModal();
-            }
-        });
+            // Close modal with Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && projectModal.classList.contains('show')) {
+                    closeModal();
+                }
+            });
+        }
     }
 
     // Show project modal with data
     function showProjectModal(projectId) {
+        if (!projectModal) return;
+
         const data = projectData[projectId];
 
         // Set modal content
@@ -504,6 +277,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close project modal
     function closeModal() {
+        if (!projectModal) return;
+
         projectModal.classList.remove('show');
         document.body.style.overflow = '';
 
