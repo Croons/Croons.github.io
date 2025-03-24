@@ -5,9 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oscar Boutani | Game Developer</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="character"></div>
+
+    <div class="game-ui">
+        <div class="game-controls">
+            <div class="control-key">W</div>
+            <div class="control-key">A</div>
+            <div class="control-key">S</div>
+            <div class="control-key">D</div>
+        </div>
+        <div class="achievement-list">
+            <div class="achievement" data-id="visit-about">Explore About Section</div>
+            <div class="achievement" data-id="visit-projects">View Projects Gallery</div>
+            <div class="achievement" data-id="visit-contact">Make Contact</div>
+            <div class="achievement" data-id="secret-1">???</div>
+            <div class="achievement" data-id="secret-2">???</div>
+            <div class="achievement" data-id="secret-3">???</div>
+        </div>
+    </div>
+
+    <button class="game-toggle">GAME MODE: OFF</button>
+
     <header>
         <div class="container">
             <h1 class="pixel-font">Oscar Boutani</h1>
@@ -28,6 +49,7 @@
                 <p>Transforming creative ideas into immersive gameplay experiences</p>
             </div>
         </div>
+        <div class="secret" data-secret="secret-1" style="top: 70%; right: 15%;"></div>
     </section>
 
     <section id="about">
@@ -46,11 +68,11 @@
                         <li>Godot</li>
                         <li>XR Development</li>
                         <li>Android-based VR</li>
-                        <!-- Add more skills as needed -->
                     </ul>
                 </div>
             </div>
         </div>
+        <div class="secret" data-secret="secret-2" style="bottom: 20%; left: 10%;"></div>
     </section>
 
     <section id="projects">
@@ -59,9 +81,15 @@
 
             <!-- Featured Project -->
             <div class="featured-project project-card">
-                <div class="project-image">
-                    <!-- Replace with your project image -->
-                    <img src="images/featured-project.jpg" alt="Featured Project">
+                <div class="project-media">
+                    <div class="project-screenshots">
+                        <div class="project-image">
+                            <img src="images/featured-project.jpg" alt="Featured Project">
+                        </div>
+                    </div>
+                    <div class="project-video">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Featured Project Video" allowfullscreen></iframe>
+                    </div>
                 </div>
                 <div class="project-info">
                     <h3 class="pixel-font">Featured Project Title</h3>
@@ -148,6 +176,7 @@
                 </div>
             </div>
         </div>
+        <div class="secret" data-secret="secret-3" style="top: 50%; right: 5%;"></div>
     </section>
 
     <section id="contact">
@@ -182,5 +211,7 @@
             <p>&copy; 2025 Oscar Boutani. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="js/game.js"></script>
 </body>
 </html>
