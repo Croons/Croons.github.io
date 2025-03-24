@@ -7,27 +7,26 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div id="character"></div>
+<body class="game-mode-active">
+    <!-- Tilemap background layers -->
+    <div class="tilemap-layer parallax-layer-1"></div>
+    <div class="tilemap-layer parallax-layer-2"></div>
 
+    <!-- Achievements panel -->
     <div class="game-ui">
-        <div class="game-controls">
-            <div class="control-key">W</div>
-            <div class="control-key">A</div>
-            <div class="control-key">S</div>
-            <div class="control-key">D</div>
-        </div>
         <div class="achievement-list">
             <div class="achievement" data-id="visit-about">Explore About Section</div>
             <div class="achievement" data-id="visit-projects">View Projects Gallery</div>
             <div class="achievement" data-id="visit-contact">Make Contact</div>
-            <div class="achievement" data-id="secret-1">???</div>
-            <div class="achievement" data-id="secret-2">???</div>
-            <div class="achievement" data-id="secret-3">???</div>
+            <div class="achievement" data-id="secret-1">Find the Hidden Key</div>
+            <div class="achievement" data-id="secret-2">Discover the Pixel Gem</div>
+            <div class="achievement" data-id="secret-3">Uncover the Lost Code</div>
+            <div class="achievement" data-id="click-skills">Study the Skills</div>
+            <div class="achievement" data-id="view-all-projects">See All Projects</div>
+            <div class="achievement" data-id="konami-code">??? Secret Pattern ???</div>
+            <div class="achievement" data-id="click-20-times">Persistent Clicker</div>
         </div>
     </div>
-
-    <button class="game-toggle">GAME MODE: OFF</button>
 
     <header>
         <div class="container">
@@ -60,7 +59,7 @@
                     <p>I'm Oscar, a game designer with a passion for creating immersive experiences. With expertise in Unity and Godot, I specialize in XR development for platforms like Meta Quest 2/3.</p>
                     <p>My approach combines innovative gameplay mechanics with thoughtful design to create engaging player experiences.</p>
                 </div>
-                <div class="skills">
+                <div class="skills" data-achievement="click-skills">
                     <h3 class="pixel-font">Skills</h3>
                     <ul class="skills-list">
                         <li>Game Design</li>
@@ -87,96 +86,112 @@
                             <img src="images/featured-project.jpg" alt="Featured Project">
                         </div>
                     </div>
-                    <div class="project-video">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Featured Project Video" allowfullscreen></iframe>
-                    </div>
                 </div>
-                <div class="project-info">
-                    <h3 class="pixel-font">Featured Project Title</h3>
-                    <p>A brief description of your main project goes here. This should highlight the key features and your role.</p>
-                    <div class="project-tech">
-                        <span>Unity</span>
-                        <span>XR</span>
-                        <span>Quest 2</span>
-                    </div>
-                    <a href="projects/featured-project.html" class="btn pixel-font">View Project</a>
-                </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Oscar Boutani. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Animated pixel characters -->
+    <div class="pixel-character" style="top: 30%; left: 10%;"></div>
+    <div class="pixel-character jumping" style="top: 60%; left: 80%;"></div>
+    <div class="pixel-character" style="top: 45%; left: 55%;"></div>
+
+    <script src="js/game.js"></script>
+    </div>
+    <div class="project-video">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Featured Project Video" allowfullscreen></iframe>
+    </div>
+    </div>
+    <div class="project-info">
+        <h3 class="pixel-font">Featured Project Title</h3>
+        <p>A brief description of your main project goes here. This should highlight the key features and your role.</p>
+        <div class="project-tech">
+            <span>Unity</span>
+            <span>XR</span>
+            <span>Quest 2</span>
+        </div>
+        <a href="projects/featured-project.html" class="btn pixel-font">View Project</a>
+    </div>
+    </div>
+
+    <!-- Other Projects Grid -->
+    <div class="projects-grid" data-achievement="view-all-projects">
+        <!-- Project 1 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/project1.jpg" alt="Project 1">
             </div>
-
-            <!-- Other Projects Grid -->
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/project1.jpg" alt="Project 1">
-                    </div>
-                    <h3 class="pixel-font">Project 1</h3>
-                    <p>Short description of project 1.</p>
-                    <div class="project-tech">
-                        <span>Unity</span>
-                        <span>2D</span>
-                    </div>
-                    <a href="projects/project1.html" class="btn pixel-font">Details</a>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/project2.jpg" alt="Project 2">
-                    </div>
-                    <h3 class="pixel-font">Project 2</h3>
-                    <p>Short description of project 2.</p>
-                    <div class="project-tech">
-                        <span>Godot</span>
-                        <span>3D</span>
-                    </div>
-                    <a href="projects/project2.html" class="btn pixel-font">Details</a>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/project3.jpg" alt="Project 3">
-                    </div>
-                    <h3 class="pixel-font">Project 3</h3>
-                    <p>Short description of project 3.</p>
-                    <div class="project-tech">
-                        <span>XR</span>
-                        <span>Unity</span>
-                    </div>
-                    <a href="projects/project3.html" class="btn pixel-font">Details</a>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/project4.jpg" alt="Project 4">
-                    </div>
-                    <h3 class="pixel-font">Project 4</h3>
-                    <p>Short description of project 4.</p>
-                    <div class="project-tech">
-                        <span>Godot</span>
-                        <span>2D</span>
-                    </div>
-                    <a href="projects/project4.html" class="btn pixel-font">Details</a>
-                </div>
+            <h3 class="pixel-font">Project 1</h3>
+            <p>Short description of project 1.</p>
+            <div class="project-tech">
+                <span>Unity</span>
+                <span>2D</span>
             </div>
+            <a href="projects/project1.html" class="btn pixel-font">Details</a>
+        </div>
 
-            <!-- Mini Projects Collection -->
-            <div class="mini-projects">
-                <div class="project-card wide">
-                    <div class="project-image">
-                        <img src="images/mini-projects.jpg" alt="Mini Projects">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="pixel-font">Mini Projects Collection</h3>
-                        <p>A collection of smaller game prototypes and experiments.</p>
-                        <a href="projects/mini-projects.html" class="btn pixel-font">Explore All</a>
-                    </div>
-                </div>
+        <!-- Project 2 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/project2.jpg" alt="Project 2">
+            </div>
+            <h3 class="pixel-font">Project 2</h3>
+            <p>Short description of project 2.</p>
+            <div class="project-tech">
+                <span>Godot</span>
+                <span>3D</span>
+            </div>
+            <a href="projects/project2.html" class="btn pixel-font">Details</a>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/project3.jpg" alt="Project 3">
+            </div>
+            <h3 class="pixel-font">Project 3</h3>
+            <p>Short description of project 3.</p>
+            <div class="project-tech">
+                <span>XR</span>
+                <span>Unity</span>
+            </div>
+            <a href="projects/project3.html" class="btn pixel-font">Details</a>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/project4.jpg" alt="Project 4">
+            </div>
+            <h3 class="pixel-font">Project 4</h3>
+            <p>Short description of project 4.</p>
+            <div class="project-tech">
+                <span>Godot</span>
+                <span>2D</span>
+            </div>
+            <a href="projects/project4.html" class="btn pixel-font">Details</a>
+        </div>
+    </div>
+
+    <!-- Mini Projects Collection -->
+    <div class="mini-projects">
+        <div class="project-card wide">
+            <div class="project-image">
+                <img src="images/mini-projects.jpg" alt="Mini Projects">
+            </div>
+            <div class="project-info">
+                <h3 class="pixel-font">Mini Projects Collection</h3>
+                <p>A collection of smaller game prototypes and experiments.</p>
+                <a href="projects/mini-projects.html" class="btn pixel-font">Explore All</a>
             </div>
         </div>
-        <div class="secret" data-secret="secret-3" style="top: 50%; right: 5%;"></div>
+    </div>
+    </div>
+    <div class="secret" data-secret="secret-3" style="top: 50%; right: 5%;"></div>
     </section>
 
     <section id="contact">
@@ -202,16 +217,3 @@
                         <span>BlueSky</span>
                     </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Oscar Boutani. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="js/game.js"></script>
-</body>
-</html>
