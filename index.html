@@ -11,6 +11,16 @@
     <!-- Tilemap background layer -->
     <div class="bg-layer"></div>
 
+    <!-- Decorative side elements -->
+    <div class="side-decorations">
+        <div class="side-element left-top"></div>
+        <div class="side-element left-middle"></div>
+        <div class="side-element left-bottom"></div>
+        <div class="side-element right-top"></div>
+        <div class="side-element right-middle"></div>
+        <div class="side-element right-bottom"></div>
+    </div>
+
     <!-- Achievement notification area -->
     <div class="achievement-container">
         <div class="achievement-list">
@@ -24,6 +34,7 @@
             <div class="achievement" data-id="click-skills">Study the Skills</div>
             <div class="achievement" data-id="view-all-projects">See All Projects</div>
             <div class="achievement" data-id="click-20-times">Persistent Clicker</div>
+            <div class="achievement" data-id="visit-experience">Review Experience</div>
         </div>
     </div>
 
@@ -35,6 +46,7 @@
                 <ul>
                     <li><a href="#about" class="pixel-font">About</a></li>
                     <li><a href="#projects" class="pixel-font">Projects</a></li>
+                    <li><a href="#experience" class="pixel-font">Experience</a></li>
                     <li><a href="#contact" class="pixel-font">Contact</a></li>
                 </ul>
             </nav>
@@ -45,10 +57,20 @@
     <section id="hero">
         <div class="container">
             <div class="hero-content">
-                <h2 class="pixel-font">W e l c o m e !</h2>
+                <div class="typing-container">
+                    <h2 class="pixel-font typing-effect">W e l c o m e !</h2>
+                </div>
+                <div class="tagline-container">
+                    <p class="hero-tagline pixel-font">Game Designer & XR Developer crafting immersive digital experiences</p>
+                    <div class="animated-underline"></div>
+                </div>
+                <div class="animated-icon">
+                    <div class="pixel-controller"></div>
+                </div>
                 <div class="quick-links">
                     <a href="#about" class="btn pixel-font">About Me</a>
                     <a href="#projects" class="btn pixel-font">View Projects</a>
+                    <a href="#experience" class="btn pixel-font">Experience</a>
                     <a href="#contact" class="btn pixel-font">Get in Touch</a>
                 </div>
             </div>
@@ -62,16 +84,9 @@
             <h2 class="section-title pixel-font">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <div class="bio-short">
-                        <p>I'm Oscar, a game designer with a passion for creating immersive experiences. With expertise in Unity and Godot, I specialize in XR development for platforms like Meta Quest 2/3.</p>
-                        <button class="btn-read-more pixel-font">Read More</button>
-                    </div>
-                    <div class="bio-full">
-                        <p>I'm Oscar, a game designer with a passion for creating immersive experiences. With expertise in Unity and Godot, I specialize in XR development for platforms like Meta Quest 2/3.</p>
-                        <p>My approach combines innovative gameplay mechanics with thoughtful design to create engaging player experiences.</p>
-                        <p>I've been developing games for over 5 years, with experience in both indie and professional settings. My goal is to create games that challenge players while providing memorable moments.</p>
-                        <button class="btn-read-less pixel-font">Show Less</button>
-                    </div>
+                    <p>I'm Oscar, a game designer with a passion for creating immersive experiences. With expertise in Unity and Godot, I specialize in XR development for platforms like Meta Quest 2/3.</p>
+                    <p>My approach combines innovative gameplay mechanics with thoughtful design to create engaging player experiences.</p>
+                    <p>I've been developing games for over 5 years, with experience in both indie and professional settings. My goal is to create games that challenge players while providing memorable moments.</p>
                 </div>
                 <div class="skills" data-achievement="click-skills">
                     <h3 class="pixel-font">Skills</h3>
@@ -196,6 +211,73 @@
         <div class="secret" data-secret="secret-3"></div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title pixel-font">Professional Experience</h2>
+
+            <div class="experience-grid">
+                <!-- REND IMP SPEC -->
+                <div class="experience-card">
+                    <div class="experience-image">
+                        <img src="images/experience/company1.jpg" alt="Company 1">
+                    </div>
+                    <div class="experience-info">
+                        <h3 class="pixel-font">Render Improvement Specialist</h3>
+                        <div class="experience-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Company:</span>
+                                <span>Ericsson</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Month/Year:</span>
+                                <span>06/2023 - 09/2023</span>
+                            </div>
+                        </div>
+                        <p>Conducted in-depth research on emerging technologies and industry trends in XR rendering, graphics optimization and online frameworks. Translating findings into actionable strategies to drive continuous improvement in XR development workflows with the help of collaboration and utilization of SLR.</p>
+                        <div class="experience-skills">
+                            <span>Unity Engine</span>
+                            <span>XR Development</span>
+                            <span>Pipeline Optimization</span>
+                            <span>Android Deplayment</span>
+                            <span>GPU Programming</span>
+                            <span>Meta API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GODOT DEV -->
+                <div class="experience-card">
+                    <div class="experience-image">
+                        <img src="images/experience/company2.jpg" alt="Company 2">
+                    </div>
+                    <div class="experience-info">
+                        <h3 class="pixel-font">Godot Developer</h3>
+                        <div class="experience-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Company:</span>
+                                <span>Ericsson</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Month/Year:</span>
+                                <span>06/2024 - 08/2024</span>
+                            </div>
+                        </div>
+                        <p>Pioneered adoption of Godot Engine to accelerate in-house tool development and VR/AR experience creation. Compared Godot's XR performance to Unity, emphasizing its cost savings, cross-platform versatility, and scalability for small-to-midsize projects through technical reports and team-driven prototypes.</p>
+                        <div class="experience-skills">
+                            <span>Godot Engine</span>
+                            <span>XR Development</span>
+                            <span>Customer Experience</span>
+                            <span>Meta API</span>
+                            <span>Large Presentation</span>
+                            <span>Android Deployment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -305,7 +387,7 @@
                     "images/projects/featured-2.jpg",
                     "images/projects/featured-3.jpg"
                 ],
-                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/watch?v=EhS2IWsT0LY" title="Gameplay Trailer" frameborder="0" allowfullscreen></iframe>',
+                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/EhS2IWsT0LY?si=qPeAgV1qjcfG7xa0" title="Gameplay Trailer" frameborder="0" allowfullscreen></iframe>',
                 links: {
                     code: "https://store.steampowered.com/app/3307300/",
                     play: "https://itch.io/featured-project",

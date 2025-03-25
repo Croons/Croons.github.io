@@ -9,10 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const projectsGrid = document.querySelector('.projects-grid');
     const achievementContainer = document.querySelector('.achievement-container');
     const achievementNotification = document.querySelector('.achievement-notification');
-    const btnReadMore = document.querySelector('.btn-read-more');
-    const btnReadLess = document.querySelector('.btn-read-less');
-    const bioShort = document.querySelector('.bio-short');
-    const bioFull = document.querySelector('.bio-full');
+    const experienceSection = document.getElementById('experience');
 
     // Game state
     let unlockedAchievements = localStorage.getItem('achievements')
@@ -24,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeAchievements();
     initializeScrollAnimations();
     initializeModals();
-    initializeBioToggle();
     initializeGame();
 
     // Scroll to sections when links are clicked
@@ -48,21 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // Initialize read more/less toggle for bio
-    function initializeBioToggle() {
-        if (!btnReadMore || !btnReadLess || !bioShort || !bioFull) return;
-
-        btnReadMore.addEventListener('click', function () {
-            bioShort.style.display = 'none';
-            bioFull.style.display = 'block';
-        });
-
-        btnReadLess.addEventListener('click', function () {
-            bioFull.style.display = 'none';
-            bioShort.style.display = 'block';
-        });
-    }
 
     // Initialize achievement system
     function initializeAchievements() {
@@ -101,6 +82,12 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
+        if (experienceSection) {
+            experienceSection.addEventListener('click', function () {
+                unlockAchievement('visit-experience');
+            });
+        }
+
         // Track scroll position for section achievements
         window.addEventListener('scroll', checkScrollAchievements);
 
@@ -122,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Check for section-based achievements
     function checkScrollAchievements() {
-        const sections = ['about', 'projects', 'contact'];
+        const sections = ['about', 'projects', 'experience', 'contact'];
         const scrollPos = window.scrollY + window.innerHeight / 2;
 
         sections.forEach(section => {
@@ -140,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize scroll animations
     function initializeScrollAnimations() {
-        const elements = document.querySelectorAll('.section-title, .about-content, .project-card, .contact-content');
+        const elements = document.querySelectorAll('.section-title, .about-content, .project-card, .experience-card, .contact-content');
 
         // Intersection Observer for fade-in animations
         const observer = new IntersectionObserver((entries) => {
@@ -291,5 +278,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 videoIframe.src = videoSrc;
             }
         }, 300);
+    }
+
+    // Initialize game elements
+    function initializeGame() {
+        // Add animation to side elements when hovered
+        const sideElements = document.querySelectorAll('.side-element');
+        sideElements.forEach(element => {
+            element.addEventListener('mouseenter', function () {
+                this.style.transform = 'scale(1.2) rotate(5deg)';
+            });
+
+            element.addEventListener('mouseleave', function () {
+                this.style.transform = '';
+            });
+        });
+
+        // Add random position to secrets
+        secrets.forEach(secret => {
+            const parent = secret.parentElement;
+            const randomX = Math.floor(Math.random() * (parent.offsetWidth - 40)) + 20;
+            const randomY = Math.floor(Math.random() * (parent.offsetHeight - 40)) + 20;
+
+            secret.style.left = `${randomX}px`;
+            secret.style.top = `${randomY}px`;
+        });
     }
 });
