@@ -1064,6 +1064,8 @@ footer {
         .featured-project .project-image {
             width: 50%;
             padding-bottom: 28.125%; /* 16:9 for half width */
+            height: auto;
+            position: relative;
         }
 
         .featured-project .project-info {
