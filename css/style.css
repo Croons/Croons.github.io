@@ -68,8 +68,8 @@ a {
     pointer-events: none;
 }
 
-/* Side Decorations */
-.side-decorations {
+/* Floating pixel dots */
+#pixel-dots-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -77,72 +77,17 @@ a {
     height: 100%;
     z-index: -1;
     pointer-events: none;
+    overflow: hidden;
 }
 
-.side-element {
+.pixel-dot {
     position: absolute;
-    width: 100px;
-    height: 100px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.15;
-    transition: opacity 0.5s ease;
-}
-
-    .side-element:hover {
-        opacity: 0.3;
-    }
-
-.left-top {
-    top: 120px;
-    left: 20px;
-    background-image: url('../images/decorations/pixel-decoration-1.png');
-    animation: floatAnimation 10s ease-in-out infinite;
-}
-
-.left-middle {
-    top: 50%;
-    left: 30px;
-    background-image: url('../images/decorations/pixel-decoration-2.png');
-    animation: floatAnimation 8s ease-in-out infinite 1s;
-}
-
-.left-bottom {
-    bottom: 120px;
-    left: 40px;
-    background-image: url('../images/decorations/pixel-decoration-3.png');
-    animation: floatAnimation 12s ease-in-out infinite 2s;
-}
-
-.right-top {
-    top: 120px;
-    right: 20px;
-    background-image: url('../images/decorations/pixel-decoration-4.png');
-    animation: floatAnimation 9s ease-in-out infinite 0.5s;
-}
-
-.right-middle {
-    top: 50%;
-    right: 30px;
-    background-image: url('../images/decorations/pixel-decoration-5.png');
-    animation: floatAnimation 11s ease-in-out infinite 1.5s;
-}
-
-.right-bottom {
-    bottom: 120px;
-    right: 40px;
-    background-image: url('../images/decorations/pixel-decoration-6.png');
-    animation: floatAnimation 7s ease-in-out infinite 2.5s;
-}
-
-@keyframes floatAnimation {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
+    width: 5px;
+    height: 5px;
+    background-image: url('../images/decorations/dot1.jpg');
+    background-size: cover;
+    pointer-events: none;
+    transform-origin: center;
 }
 
 /* Header */
@@ -360,8 +305,9 @@ section {
 .about-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 20px;
     align-items: flex-start;
+    justify-content: space-between;
 }
 
 .about-text {
@@ -376,6 +322,48 @@ section {
         margin-bottom: 20px;
         line-height: 1.8;
     }
+
+.profile-image {
+    flex: 1;
+    min-width: 250px;
+    background-color: var(--card-bg);
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    transition: all var(--transition-speed) ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+    .profile-image:hover {
+        border-color: var(--accent-color);
+        transform: translateY(-5px);
+    }
+
+.image-container {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0 auto;
+    background-color: var(--bg-secondary);
+}
+
+.pixel-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--accent-color);
+    /* Pixelated border effect */
+    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><path fill="white" d="M1,1 h2 v2 h-2 z"/></svg>') 1 repeat;
+    pointer-events: none;
+}
 
 .skills {
     flex: 1;
@@ -1039,8 +1027,13 @@ footer {
 
 .project-links {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.project-primary-btn {
+    min-width: 200px;
+    text-align: center;
 }
 
 /* Responsive Styles */
@@ -1071,6 +1064,14 @@ footer {
         .featured-project .project-info {
             width: 50%;
         }
+
+    .about-content {
+        flex-direction: row;
+    }
+
+    .profile-image, .about-text, .skills {
+        flex: 1;
+    }
 }
 
 @media screen and (max-width: 767px) {
@@ -1115,8 +1116,10 @@ footer {
 
     .about-content {
         gap: 30px;
+        flex-direction: column;
     }
 
+    .profile-image,
     .about-text,
     .skills {
         min-width: 100%;
@@ -1133,10 +1136,6 @@ footer {
 
     .contact-link {
         width: 100%;
-    }
-
-    .side-element {
-        display: none;
     }
 }
 
@@ -1155,6 +1154,29 @@ footer {
 
 .fade-in-up {
     animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Float animation for pixel dots */
+@keyframes floatAnimation {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(15px, -15px);
+    }
+
+    50% {
+        transform: translate(5px, 25px);
+    }
+
+    75% {
+        transform: translate(-20px, 10px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 /* Scrollbar Styling */

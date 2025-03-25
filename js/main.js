@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const achievementContainer = document.querySelector('.achievement-container');
     const achievementNotification = document.querySelector('.achievement-notification');
     const experienceSection = document.getElementById('experience');
+    const pixelDotsContainer = document.getElementById('pixel-dots-container');
 
     // Game state
     let unlockedAchievements = localStorage.getItem('achievements')
@@ -22,6 +23,43 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeScrollAnimations();
     initializeModals();
     initializeGame();
+    createPixelDots();
+
+    // Create floating pixel dots
+    function createPixelDots() {
+        const numDots = 120; // Increased number of dots
+
+        for (let i = 0; i < numDots; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('pixel-dot');
+
+            // Random position
+            const randomX = Math.random() * 100;
+            const randomY = Math.random() * 100;
+            dot.style.left = `${randomX}%`;
+            dot.style.top = `${randomY}%`;
+
+            // Random opacity between 0.5 and 1
+            const randomOpacity = 0.5 + Math.random() * 0.5;
+            dot.style.opacity = randomOpacity;
+
+            // Random animation duration between 15 and 30 seconds (faster)
+            const animationDuration = 15 + Math.random() * 15;
+
+            // Set animation with proper syntax to ensure it works
+            dot.style.animation = `floatAnimation ${animationDuration}s ease-in-out infinite`;
+
+            // Random animation delay to prevent synchronized movement
+            const animationDelay = Math.random() * 10;
+            dot.style.animationDelay = `${animationDelay}s`;
+
+            // Random initial rotation
+            const randomRotation = Math.random() * 360;
+            dot.style.transform = `rotate(${randomRotation}deg)`;
+
+            pixelDotsContainer.appendChild(dot);
+        }
+    }
 
     // Scroll to sections when links are clicked
     const navLinks = document.querySelectorAll('nav a, .quick-links a');
@@ -252,10 +290,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Set video
         projectModal.querySelector('.video-container').innerHTML = data.videoEmbed;
 
-        // Set links
-        projectModal.querySelector('.btn-code').href = data.links.code;
-        projectModal.querySelector('.btn-play').href = data.links.play;
-        projectModal.querySelector('.btn-download').href = data.links.download;
+        // Set primary button
+        const primaryButton = projectModal.querySelector('.project-primary-btn');
+        primaryButton.textContent = data.primaryButton.text;
+        primaryButton.href = data.primaryButton.link;
 
         // Show modal
         projectModal.classList.add('show');
@@ -282,18 +320,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize game elements
     function initializeGame() {
-        // Add animation to side elements when hovered
-        const sideElements = document.querySelectorAll('.side-element');
-        sideElements.forEach(element => {
-            element.addEventListener('mouseenter', function () {
-                this.style.transform = 'scale(1.2) rotate(5deg)';
-            });
-
-            element.addEventListener('mouseleave', function () {
-                this.style.transform = '';
-            });
-        });
-
         // Add random position to secrets
         secrets.forEach(secret => {
             const parent = secret.parentElement;

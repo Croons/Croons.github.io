@@ -11,15 +11,8 @@
     <!-- Tilemap background layer -->
     <div class="bg-layer"></div>
 
-    <!-- Decorative side elements -->
-    <div class="side-decorations">
-        <div class="side-element left-top"></div>
-        <div class="side-element left-middle"></div>
-        <div class="side-element left-bottom"></div>
-        <div class="side-element right-top"></div>
-        <div class="side-element right-middle"></div>
-        <div class="side-element right-bottom"></div>
-    </div>
+    <!-- Floating pixel dots container -->
+    <div id="pixel-dots-container"></div>
 
     <!-- Achievement notification area -->
     <div class="achievement-container">
@@ -64,14 +57,14 @@
                     <p class="hero-tagline pixel-font">Game Designer & XR Developer crafting immersive digital experiences</p>
                     <div class="animated-underline"></div>
                 </div>
-                <div class="animated-icon">
-                    <div class="pixel-controller"></div>
-                </div>
                 <div class="quick-links">
                     <a href="#about" class="btn pixel-font">About Me</a>
                     <a href="#projects" class="btn pixel-font">View Projects</a>
                     <a href="#experience" class="btn pixel-font">Experience</a>
                     <a href="#contact" class="btn pixel-font">Get in Touch</a>
+                </div>
+                <div class="animated-icon">
+                    <div class="pixel-controller"></div>
                 </div>
             </div>
         </div>
@@ -83,11 +76,22 @@
         <div class="container">
             <h2 class="section-title pixel-font">About Me</h2>
             <div class="about-content">
+                <!-- Profile Image Card -->
+                <div class="profile-image">
+                    <div class="image-container">
+                        <div class="pixel-border"></div>
+                        <img src="images/profile.png" alt="Oscar Boutani" width="300" height="300">
+                    </div>
+                </div>
+
+                <!-- About Text -->
                 <div class="about-text">
                     <p>I'm Oscar, a game designer with a passion for creating immersive experiences. With expertise in Unity and Godot, I specialize in game design such as gameplay and features, but also XR development</p>
                     <p>My approach combines innovative gameplay mechanics with thoughtful design to create engaging player and customer experiences.</p>
                     <p>I've been ierested in software my whole life, with experience in both indie and professional settings.</p>
                 </div>
+
+                <!-- Skills Box -->
                 <div class="skills" data-achievement="click-skills">
                     <h3 class="pixel-font">Skills</h3>
                     <ul class="skills-list">
@@ -356,9 +360,7 @@
                 </div>
 
                 <div class="project-links">
-                    <a href="#" class="btn pixel-font btn-code">Steam Page</a>
-                    <a href="#" class="btn pixel-font btn-play">Play Demo</a>
-                    <a href="#" class="btn pixel-font btn-download">Download</a>
+                    <a href="#" class="btn pixel-font project-primary-btn">View Project</a>
                 </div>
             </div>
         </div>
@@ -379,7 +381,7 @@
         const projectData = {
             featured: {
                 title: "Chained 2 Violence",
-                description: "<p>My largest project yet! A two player co-op endless wave survival roguelite, with a twist! Both players are chained together. Taking a leading role in this project as a game designer has been super fun, I spent a lot of time designing core gameplay elements and creating a fun gameloop. Me and the team have worked really hard and continue to work hard on this game to get it ready for release.</p> <p>-----</p> <p>Game Description:</p> <p>Chained-2-Violence throws you and a friend into a chaotic, gladiatorial fight for survival—where teamwork isn't just important, it’s chained to your success. Bound together by a single, unbreakable chain, you’ll battle relentless waves of enemies, adapt to evolving arenas, and unleash devastating chain-based abilities. The key? Stay in sync, or face brutal consequences. From ancient Rome to futuristic wastelands, each era transforms the battlefield with unique enemies, challenges, and over-the-top physics-driven chaos. Will you master the chain and overcome the odds, or succumb to the violence?</p>",
+                description: "<p>My largest project yet! A two player co-op endless wave survival roguelite, with a twist! Both players are chained together. Taking a leading role in this project as a game designer has been super fun, I spent a lot of time designing core gameplay elements and creating a fun gameloop. Me and the team have worked really hard and continue to work hard on this game to get it ready for release.</p> <p>-----</p> <p>Game Description:</p> <p>Chained-2-Violence throws you and a friend into a chaotic, gladiatorial fight for survival—where teamwork isn't just important, it's chained to your success. Bound together by a single, unbreakable chain, you'll battle relentless waves of enemies, adapt to evolving arenas, and unleash devastating chain-based abilities. The key? Stay in sync, or face brutal consequences. From ancient Rome to futuristic wastelands, each era transforms the battlefield with unique enemies, challenges, and over-the-top physics-driven chaos. Will you master the chain and overcome the odds, or succumb to the violence?</p>",
                 devTime: "20 Weeks",
                 teamSize: "8 people",
                 tech: ["Unity", "Steam API", "Windows", "Linux"],
@@ -389,10 +391,9 @@
                     "images/projects/featured-3.jpg"
                 ],
                 videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/EhS2IWsT0LY?si=qPeAgV1qjcfG7xa0" title="Gameplay Trailer" frameborder="0" allowfullscreen></iframe>',
-                links: {
-                    code: "https://store.steampowered.com/app/3307300/",
-                    play: "https://itch.io/featured-project",
-                    download: "https://example.com/download/featured-project"
+                primaryButton: {
+                    text: "Steam Page",
+                    link: "https://store.steampowered.com/app/3307300/"
                 }
             },
             project1: {
@@ -406,10 +407,9 @@
                     "images/projects/project1-2.jpg"
                 ],
                 videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/EhS2IWsT0LY?si=qPeAgV1qjcfG7xa0" title="Gameplay Video" frameborder="0" allowfullscreen></iframe>',
-                links: {
-                    code: "https://github.com/yourname/project1",
-                    play: "https://itch.io/project1",
-                    download: "https://example.com/download/project1"
+                primaryButton: {
+                    text: "View Demo",
+                    link: "https://itch.io/project1"
                 }
             },
             project2: {
@@ -423,10 +423,9 @@
                     "images/projects/project2-2.jpg"
                 ],
                 videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/HjT7ti18BlM?si=oAWWFS7YBcmLNQuV" title="Gameplay Video" frameborder="0" allowfullscreen></iframe>',
-                links: {
-                    code: "https://github.com/yourname/project2",
-                    play: "https://itch.io/project2",
-                    download: "https://example.com/download/project2"
+                primaryButton: {
+                    text: "Project Details",
+                    link: "https://example.com/project2"
                 }
             },
             project3: {
@@ -440,10 +439,9 @@
                     "images/projects/project3-2.jpg"
                 ],
                 videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project 3 Video" frameborder="0" allowfullscreen></iframe>',
-                links: {
-                    code: "https://github.com/yourname/project3",
-                    play: "https://itch.io/project3",
-                    download: "https://example.com/download/project3"
+                primaryButton: {
+                    text: "Download",
+                    link: "https://example.com/download/project3"
                 }
             },
             project4: {
@@ -457,10 +455,9 @@
                     "images/projects/project4-2.jpg"
                 ],
                 videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project 4 Video" frameborder="0" allowfullscreen></iframe>',
-                links: {
-                    code: "https://github.com/yourname/project4",
-                    play: "https://itch.io/project4",
-                    download: "https://example.com/download/project4"
+                primaryButton: {
+                    text: "Play Now",
+                    link: "https://itch.io/project4"
                 }
             }
         };
