@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             dot.style.top = `${randomY}%`;
 
             // Random opacity between 0.5 and 1
-            const randomOpacity = 0.5 + Math.random() * 0.5;
+            const randomOpacity = 0.2 + Math.random() * 0.4;
             dot.style.opacity = randomOpacity;
 
             // Random animation duration between 15 and 30 seconds (faster)
