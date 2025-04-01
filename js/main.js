@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const achievementNotification = document.querySelector('.achievement-notification');
     const experienceSection = document.getElementById('experience');
     const pixelDotsContainer = document.getElementById('pixel-dots-container');
+    const skillItems = document.querySelectorAll('.skills-list li');
 
     // Game state
     let unlockedAchievements = localStorage.getItem('achievements')
@@ -24,6 +25,46 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeModals();
     initializeGame();
     createPixelDots();
+    initializeExpandableSkills();
+
+    // Initialize expandable skills
+    function initializeExpandableSkills() {
+        skillItems.forEach(skill => {
+            skill.addEventListener('click', function (e) {
+                // Prevent click from affecting achievement
+                e.stopPropagation();
+
+                // Toggle expanded class
+                this.classList.toggle('expanded');
+
+                // Get the description element
+                const description = this.querySelector('.skill-description');
+
+                // Get the computed style to check if it's already expanded
+                const computedStyle = window.getComputedStyle(description);
+
+                // If it's already expanded, collapse it
+                if (description.style.maxHeight !== '0px' && this.classList.contains('expanded')) {
+                    description.style.maxHeight = description.scrollHeight + 'px';
+                    // Force reflow
+                    description.offsetHeight;
+                    description.style.maxHeight = '100px';
+                } else {
+                    // Otherwise, set it to 0 first to ensure animation works
+                    description.style.maxHeight = '0px';
+                    // Force reflow
+                    description.offsetHeight;
+                    // Then set to actual height if expanding
+                    if (this.classList.contains('expanded')) {
+                        description.style.maxHeight = description.scrollHeight + 'px';
+                    }
+                }
+
+                // Unlock achievement for interacting with skills
+                unlockAchievement('click-skills');
+            });
+        });
+    }
 
     // Create floating pixel dots
     function createPixelDots() {

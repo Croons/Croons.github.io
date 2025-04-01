@@ -72,6 +72,7 @@
     </section>
 
     <!-- About Section -->
+    <!-- About Section -->
     <section id="about">
         <div class="container">
             <h2 class="section-title pixel-font">About Me</h2>
@@ -88,18 +89,36 @@
                 <div class="about-text">
                     <p>I'm Oscar, a game designer with a passion for creating immersive experiences. With expertise in Unity and Godot, I specialize in game design such as gameplay and features, but also XR development</p>
                     <p>My approach combines innovative gameplay mechanics with thoughtful design to create engaging player and customer experiences.</p>
-                    <p>I've been ierested in software my whole life, with experience in both indie and professional settings.</p>
+                    <p>I've been interested in software my whole life, with experience in both indie and professional scenes.</p>
+                    <p>I love exploring new technologies and pushing the boundaries of what's possible in interactive media. Working across various platforms has given me a versatile skill set that allows me to adapt to different project requirements.</p>
+                    <p>My goal is to create memorable experiences that engage and delight users while solving meaningful problems through thoughtful design and technical innovation.</p>
                 </div>
 
                 <!-- Skills Box -->
                 <div class="skills" data-achievement="click-skills">
                     <h3 class="pixel-font">Skills</h3>
+                    <small class="skills-hint">click to expand</small>
                     <ul class="skills-list">
-                        <li>Game Design</li>
-                        <li>Unity</li>
-                        <li>Godot</li>
-                        <li>XR Development</li>
-                        <li>Android Deployment</li>
+                        <li data-skill="game-design">
+                            Game Design
+                            <div class="skill-description">Creating engaging gameplay mechanics, focusing on the most fun aspects of a game. Making sure the player experience is as engaging as possible</div>
+                        </li>
+                        <li data-skill="unity">
+                            Unity
+                            <div class="skill-description">Experienced with 2D and 3D game development in Unity, C# programming, and optimizing for multiple platforms. Having deployed many projects all with different requirements</div>
+                        </li>
+                        <li data-skill="godot">
+                            Godot
+                            <div class="skill-description">Building open-source games and tools using Godot Engine with GDScript and the Godot XR Plugin</div>
+                        </li>
+                        <li data-skill="xr">
+                            XR Development
+                            <div class="skill-description">Creating augmented and virtual reality experiences for Meta Quest headsets, ensuring stable performance to maximize customer experience</div>
+                        </li>
+                        <li data-skill="git">
+                            Git Workflow
+                            <div class="skill-description">Worked with different Git GUIs/Apps in agile workflows, using version control to deploy apps to their fullest</div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -242,7 +261,8 @@
                                 <span>06/2023 - 09/2023</span>
                             </div>
                         </div>
-                        <p>Conducted in-depth research on emerging technologies and industry trends in XR rendering, graphics optimization and online frameworks. Translating findings into actionable strategies to drive continuous improvement in XR development workflows with the help of collaboration and utilization of SLR.</p>
+                        <p>Conducted in-depth research on emerging technologies and industry trends in XR rendering, graphics optimization and online frameworks. Translating findings into actionable strategies to drive continuous improvement in XR development workflows with the help of collaboration and utilization of SLR. </p>
+                        <p>My main project was to optimize existing frameworks in Unity, testing different render engines such as Universal Pipeline Renderer (URP). This lead to increased performance in some cases for the customer portfolio experience.</p>
                         <div class="experience-skills">
                             <span>Unity Engine</span>
                             <span>XR Development</span>
@@ -272,6 +292,7 @@
                             </div>
                         </div>
                         <p>Pioneered adoption of Godot Engine to accelerate in-house tool development and VR/AR experience creation. Compared Godot's XR performance to Unity, emphasizing its cost savings, cross-platform versatility, and scalability for small-to-midsize projects through technical reports and team-driven prototypes.</p>
+                        <p>Created immersive experiences inside the Godot Engine using their XR Plugin. Finished multipble viritual showcase halls where products were displayed and highlighted while streamlining workflow for easy additions to continued development</p>
                         <div class="experience-skills">
                             <span>Godot Engine</span>
                             <span>XR Development</span>
@@ -401,7 +422,7 @@
             },
             project1: {
                 title: "Drift Shooter: Pursuit",
-                description: "<p>--</p>",
+                description: "<p>Project that was part of a research and integrated development course, having a sort of simulated work flow. With random requirements set by the supervisor making the process dynamic and reflective of a real work environment.</p>",
                 devTime: "2 months [25%]",
                 teamSize: "3-8",
                 tech: ["Unity", "3D", "Online Multiplayer"],
@@ -417,7 +438,7 @@
             },
             project2: {
                 title: "Super Hue Boy",
-                description: "<p>--</p>",
+                description: "<p>Final project as a part of a Software Architecture course, making sure the code adhere to different structures.</p>",
                 devTime: "2 weeks [50%]",
                 teamSize: "4 people",
                 tech: ["Unity 2D", "Software Architecture", "Shaders", "Code Structure"],
@@ -433,7 +454,7 @@
             },
             project3: {
                 title: "A-Mayz-Gen",
-                description: "<p>--</p>",
+                description: "<p>Final project as a part of a procedual content generation course. Letting the user pick between different algorithms to generate the maze. Also getting to choose to play the maze yourself or having an AI walk through it using Depth-First-Search.</p>",
                 devTime: "3 weeks [25%]",
                 teamSize: "3 people",
                 tech: ["Unity 2D", "Procedual Content Generation", "Generation Algorithms"],
@@ -441,28 +462,12 @@
                     "images/projects/project3-1.jpg",
                     "images/projects/project3-2.jpg"
                 ],
-                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project 3 Video" frameborder="0" allowfullscreen></iframe>',
+                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/dQw4w9WgXcQ" title="AMayzGen Showcase" frameborder="0" allowfullscreen></iframe>',
                 primaryButton: {
                     text: "View GitHub",
                     link: "https://github.com/HugoEck/PCG_Project_Maze"
                 }
             },
-            project4: {
-                title: "Project 4",
-                description: "<p>Description of Project 4 with details about the concept, implementation, and results.</p>",
-                devTime: "2 weeks",
-                teamSize: "Game Jam (4)",
-                tech: ["Godot", "2D"],
-                gallery: [
-                    "images/projects/project4-1.jpg",
-                    "images/projects/project4-2.jpg"
-                ],
-                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project 4 Video" frameborder="0" allowfullscreen></iframe>',
-                primaryButton: {
-                    text: "Play Now",
-                    link: "https://itch.io/project4"
-                }
-            }
         };
     </script>
 

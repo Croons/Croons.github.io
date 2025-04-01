@@ -160,7 +160,7 @@ nav a {
 section {
     padding: 80px 0;
     position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Removed: border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
 .section-title {
@@ -306,25 +306,13 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    align-items: flex-start;
+    align-items: stretch; /* Changed from flex-start to stretch */
     justify-content: space-between;
 }
 
-.about-text {
-    flex: 2;
-    min-width: 300px;
-    background-color: rgba(30, 30, 30, 0.7);
-    padding: 25px;
-    border-left: 2px solid var(--accent-color);
-}
-
-    .about-text p {
-        margin-bottom: 20px;
-        line-height: 1.8;
-    }
-
-.profile-image {
-    flex: 1;
+.profile-image, .about-text, .skills {
+    display: flex;
+    flex-direction: column;
     min-width: 250px;
     background-color: var(--card-bg);
     padding: 25px;
@@ -332,26 +320,37 @@ section {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     position: relative;
     transition: all var(--transition-speed) ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex: 1;
+    height: 400px; /* Fixed height for all cards */
+    align-items: center; /* Center content horizontally */
 }
 
-    .profile-image:hover {
+.profile-image {
+    justify-content: center; /* Center image vertically */
+}
+
+    .profile-image:hover, .skills:hover {
         border-color: var(--accent-color);
         transform: translateY(-5px);
     }
 
 .image-container {
     width: 100%;
-    max-width: 300px;
-    height: 300px;
+    max-width: 320px;
+    height: 320px;
     position: relative;
     margin: 0 auto;
     background-color: var(--bg-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
 .pixel-border {
     position: absolute;
@@ -365,34 +364,100 @@ section {
     pointer-events: none;
 }
 
-.skills {
-    flex: 1;
-    min-width: 250px;
-    background-color: var(--card-bg);
-    padding: 25px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    position: relative;
-    transition: all var(--transition-speed) ease;
+/* Make about text scrollable */
+.about-text {
+    background-color: rgba(30, 30, 30, 0.7);
+    border-left: 2px solid var(--accent-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary-color) var(--bg-secondary);
+    align-items: flex-start; /* Align text to the left */
 }
 
-    .skills:hover {
-        border-color: var(--accent-color);
-        transform: translateY(-5px);
-    }
-
-    .skills h3 {
+    .about-text p {
         margin-bottom: 20px;
-        font-size: 1.3rem;
-        color: var(--accent-color);
-        border-bottom: 1px solid var(--secondary-color);
-        padding-bottom: 10px;
-        display: inline-block;
+        line-height: 1.8;
+        width: 100%; /* Make paragraphs full width */
     }
 
+    /* Custom scrollbar for the about text */
+    .about-text::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    .about-text::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+        /* Pixelated track effect */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><path fill="%231a1a1a" d="M0,0 h4 v4 h-4 z"/></svg>');
+        background-size: 4px;
+    }
+
+    .about-text::-webkit-scrollbar-thumb {
+        background: var(--secondary-color);
+        border-radius: 0;
+        /* Pixelated thumb effect */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><path fill="%23888888" d="M1,1 h2 v2 h-2 z"/></svg>');
+        background-size: 4px;
+    }
+
+        .about-text::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+/* Skills Section */
+.skills h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 10px;
+    display: inline-block;
+    align-self: flex-start; /* Align heading to the left */
+}
+
+.skills-hint {
+    display: block;
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    align-self: flex-start;
+    font-style: italic;
+}
+
+/* Expandable skills styles */
 .skills-list {
     list-style: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 320px; /* Adjust based on card height */
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary-color) var(--bg-secondary);
+    width: 100%; /* Make list full width */
 }
+
+    .skills-list::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    .skills-list::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><path fill="%231a1a1a" d="M0,0 h4 v4 h-4 z"/></svg>');
+        background-size: 4px;
+    }
+
+    .skills-list::-webkit-scrollbar-thumb {
+        background: var(--secondary-color);
+        border-radius: 0;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><path fill="%23888888" d="M1,1 h2 v2 h-2 z"/></svg>');
+        background-size: 4px;
+    }
+
+        .skills-list::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
 
     .skills-list li {
         padding: 10px 0;
@@ -400,6 +465,7 @@ section {
         position: relative;
         padding-left: 25px;
         transition: all var(--transition-speed) ease;
+        cursor: pointer;
     }
 
         .skills-list li::before {
@@ -407,17 +473,38 @@ section {
             position: absolute;
             left: 0;
             color: var(--secondary-color);
-            transition: transform var(--transition-speed) ease;
+            transition: all var(--transition-speed) ease;
         }
 
         .skills-list li:hover {
-            transform: translateX(5px);
             color: var(--accent-color);
         }
 
             .skills-list li:hover::before {
                 transform: translateX(3px);
             }
+
+/* Skill description is hidden by default */
+.skill-description {
+    height: 0;
+    overflow: hidden;
+    transition: height var(--transition-speed) ease;
+    margin-top: 5px;
+    padding-left: 0;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+/* When skill is expanded */
+.skills-list li.expanded::before {
+    transform: translateX(3px) rotate(90deg);
+}
+
+.skills-list li.expanded .skill-description {
+    height: auto;
+    max-height: 100px;
+    padding: 5px 0;
+}
 
 /* Projects Section */
 .featured-project {
@@ -1068,10 +1155,6 @@ footer {
     .about-content {
         flex-direction: row;
     }
-
-    .profile-image, .about-text, .skills {
-        flex: 1;
-    }
 }
 
 @media screen and (max-width: 767px) {
@@ -1123,6 +1206,7 @@ footer {
     .about-text,
     .skills {
         min-width: 100%;
+        height: 350px; /* Slightly smaller on mobile */
     }
 
     .projects-grid,
