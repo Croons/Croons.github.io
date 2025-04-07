@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oscar Boutani | Game Developer</title>
+    <link rel="icon" href="images/profile.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
@@ -234,6 +235,117 @@
                     <button class="btn pixel-font view-project">View Project</button>
                 </div>
             </div>
+
+            <!-- View More Projects Button -->
+            <div class="view-more-container">
+                <button class="btn btn-filled pixel-font view-more-projects btn-arrow">
+                    <span class="arrow-left">→</span>
+                    View More Projects
+                    <span class="arrow-right">←</span>
+                </button>
+            </div>
+
+            <!-- Additional Projects -->
+            <div class="additional-projects projects-grid">
+                <!-- Project 4 -->
+                <div class="project-card" data-project="project4">
+                    <div class="project-image">
+                        <img src="images/projects/project4-thumb.jpg" alt="Project 4">
+                    </div>
+                    <h3 class="pixel-font">Pixel Realm</h3>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Dev Time:</span>
+                            <span>4 weeks <small>[75%]</small></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Team Size:</span>
+                            <span>2 people</span>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span>Godot Engine</span>
+                        <span>Pixel Art</span>
+                        <span>Procedural Generation</span>
+                    </div>
+                    <button class="btn pixel-font view-project">View Project</button>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card" data-project="project5">
+                    <div class="project-image">
+                        <img src="images/projects/project5-thumb.jpg" alt="Project 5">
+                    </div>
+                    <h3 class="pixel-font">VR Experience</h3>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Dev Time:</span>
+                            <span>6 weeks <small>[40%]</small></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Team Size:</span>
+                            <span>5 people</span>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span>Unity 3D</span>
+                        <span>Meta Quest</span>
+                        <span>XR Interaction</span>
+                    </div>
+                    <button class="btn pixel-font view-project">View Project</button>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card" data-project="project6">
+                    <div class="project-image">
+                        <img src="images/projects/project6-thumb.jpg" alt="Project 6">
+                    </div>
+                    <h3 class="pixel-font">Game Jam Project</h3>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Dev Time:</span>
+                            <span>48 hours <small>[100%]</small></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Team Size:</span>
+                            <span>Solo</span>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span>Unity 2D</span>
+                        <span>Ludum Dare</span>
+                        <span>Audio Design</span>
+                    </div>
+                    <button class="btn pixel-font view-project">View Project</button>
+                </div>
+            </div>
+
+            <!-- Templates for future projects (hidden) -->
+            <div class="future-projects" style="display: none;">
+                <!-- Template Project -->
+                <div class="project-card" data-project="template">
+                    <div class="project-image">
+                        <img src="images/projects/template-thumb.jpg" alt="Project Template">
+                    </div>
+                    <h3 class="pixel-font">Project Title</h3>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Dev Time:</span>
+                            <span>X weeks <small>[Y%]</small></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Team Size:</span>
+                            <span>Z people</span>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span>Technology 1</span>
+                        <span>Technology 2</span>
+                        <span>Technology 3</span>
+                    </div>
+                    <button class="btn pixel-font view-project">View Project</button>
+                </div>
+            </div>
         </div>
         <div class="secret" data-secret="secret-3"></div>
     </section>
@@ -401,6 +513,86 @@
 
     <!-- Project data store -->
     <script>
+        // Add click handler for View More Projects button
+        document.addEventListener('DOMContentLoaded', function () {
+            const viewMoreBtn = document.querySelector('.view-more-projects');
+            const additionalProjects = document.querySelector('.additional-projects');
+
+            if (viewMoreBtn && additionalProjects) {
+                // Ensure projects are collapsed by default
+                additionalProjects.style.display = 'none';
+
+                viewMoreBtn.addEventListener('click', function () {
+                    // Toggle visibility of additional projects
+                    const isShowing = additionalProjects.style.display === 'grid';
+
+                    if (isShowing) {
+                        // Hide projects
+                        additionalProjects.style.display = 'none';
+                        viewMoreBtn.innerHTML = '<span class="arrow-left">→</span>View More Projects<span class="arrow-right">←</span>';
+                        viewMoreBtn.classList.remove('active');
+                    } else {
+                        // Show projects
+                        additionalProjects.style.display = 'grid';
+                        viewMoreBtn.innerHTML = '<span class="arrow-left">→</span>Collapse Additional Projects<span class="arrow-right">←</span>';
+                        viewMoreBtn.classList.add('active');
+                    }
+                });
+            }
+
+            // Initialize image expansion functionality
+            initializeImageExpansion();
+        });
+
+        // Handle image expansion
+        function initializeImageExpansion() {
+            // Add the modal HTML to the body
+            const imageModal = document.createElement('div');
+            imageModal.className = 'image-modal';
+            imageModal.innerHTML = `
+                    <button class="close-image">&times;</button>
+                    <img src="" alt="Enlarged Project Image">
+                `;
+            document.body.appendChild(imageModal);
+
+            // Get references to modal elements
+            const modalImg = imageModal.querySelector('img');
+            const closeBtn = imageModal.querySelector('.close-image');
+
+            // Add click handlers to project gallery images
+            document.addEventListener('click', function (e) {
+                // Check if clicked element is a gallery image
+                if (e.target.tagName === 'IMG' && e.target.closest('.gallery-container')) {
+                    const imgSrc = e.target.src;
+                    modalImg.src = imgSrc;
+                    imageModal.classList.add('show');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                }
+            });
+
+            // Close modal when close button is clicked
+            closeBtn.addEventListener('click', function () {
+                imageModal.classList.remove('show');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close modal when clicking outside the image
+            imageModal.addEventListener('click', function (e) {
+                if (e.target === imageModal) {
+                    imageModal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && imageModal.classList.contains('show')) {
+                    imageModal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
         // Project data to populate modals
         const projectData = {
             featured: {
@@ -468,6 +660,72 @@
                     link: "https://github.com/HugoEck/PCG_Project_Maze"
                 }
             },
+            // Additional projects
+            project4: {
+                title: "Pixel Realm",
+                description: "<p>A procedurally generated 2D pixel art game where players explore an ever-changing fantasy world. Features randomized dungeons, NPCs with dynamic schedules, and a day/night cycle that impacts gameplay.</p>",
+                devTime: "4 weeks [75%]",
+                teamSize: "2 people",
+                tech: ["Godot Engine", "Pixel Art", "Procedural Generation"],
+                gallery: [
+                    "images/projects/project4-1.jpg",
+                    "images/projects/project4-2.jpg"
+                ],
+                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Pixel Realm Demo" frameborder="0" allowfullscreen></iframe>',
+                primaryButton: {
+                    text: "Play Demo",
+                    link: "#"
+                }
+            },
+            project5: {
+                title: "VR Experience",
+                description: "<p>An immersive VR application designed for the Meta Quest platform. Users can explore realistic environments and interact with various objects using natural hand movements.</p>",
+                devTime: "6 weeks [40%]",
+                teamSize: "5 people",
+                tech: ["Unity 3D", "Meta Quest", "XR Interaction"],
+                gallery: [
+                    "images/projects/project5-1.jpg",
+                    "images/projects/project5-2.jpg"
+                ],
+                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="VR Demo" frameborder="0" allowfullscreen></iframe>',
+                primaryButton: {
+                    text: "View Website",
+                    link: "#"
+                }
+            },
+            project6: {
+                title: "Game Jam Project",
+                description: "<p>A game developed in just 48 hours for a Ludum Dare game jam. Despite the short timeframe, it features complete gameplay, original art, and custom sound effects.</p>",
+                devTime: "48 hours [100%]",
+                teamSize: "Solo",
+                tech: ["Unity 2D", "Ludum Dare", "Audio Design"],
+                gallery: [
+                    "images/projects/project6-1.jpg",
+                    "images/projects/project6-2.jpg"
+                ],
+                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Game Jam Demo" frameborder="0" allowfullscreen></iframe>',
+                primaryButton: {
+                    text: "Play on itch.io",
+                    link: "#"
+                }
+            },
+            // Template for future projects
+            template: {
+                title: "Project Title",
+                description: "<p>Project description goes here. You can add detailed information about your project.</p>",
+                devTime: "X weeks [Y%]",
+                teamSize: "Z people",
+                tech: ["Technology 1", "Technology 2", "Technology 3"],
+                gallery: [
+                    "images/projects/template-1.jpg",
+                    "images/projects/template-2.jpg"
+                ],
+                videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Project Video" frameborder="0" allowfullscreen></iframe>',
+                primaryButton: {
+                    text: "View Project",
+                    link: "#"
+                }
+            }
         };
     </script>
 
